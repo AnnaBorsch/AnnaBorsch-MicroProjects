@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Мой профиль</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Мой профиль</h1>
+
+<div th:if="${user}">
+    <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+    <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+    <p><strong>Роли:</strong>
+        <span th:each="role : ${user.roles}" th:text="${role.name} + ' '"></span>
+    </p>
+</div>
+
+<a th:href="@{/}">На главную</a>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Главная страница</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Добро пожаловать!</h1>
+
+<div sec:authorize="isAuthenticated()">
+    <p>Вы вошли как: <span sec:authentication="name"></span></p>
+    <p>Роли: <span sec:authentication="principal.authorities"></span></p>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <a th:href="@{/admin/users}">Панель администратора</a><br>
+    </div>
+
+    <div sec:authorize="hasAnyRole('USER', 'ADMIN')">
+        <a th:href="@{/user}">Мой профиль</a><br>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Выйти"/>
+    </form>
+</div>
+
+<div sec:authorize="isAnonymous()">
+    <a th:href="@{/login}">Войти</a>
+</div>
+</body>
+</html>
